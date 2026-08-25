@@ -20,7 +20,9 @@ The underlying structure in both languages looks like this(for ` int[] `  ):
 | **Capacity**     | `size_t cap` | `int` |
 
 # Memory Management
-  * In this example, linked list with header metadata used to chain all slice memory allocations and free them all once at the end of main. 
+  * In this example, linked list with header metadata used to chain all slice memory allocations and free them all once at the end of main.
+  * This implementation is for educational purposes; in a real Go code, legacy memory should be freed,
+  * sub-slices can also point to the same memory. In Go, this problem is solved with automatic garbage collection. 
 # Code Comparison
   ```go
       Go:
