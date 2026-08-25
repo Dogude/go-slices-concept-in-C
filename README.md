@@ -7,6 +7,9 @@ A slice is not an array. It is a **header** that points to an underlying array. 
 1. **Data Pointer**: A pointer to the first element of the slice.
 2. **Length (`len`)**: The number of elements currently in the slice(also as a write index into underlying array).
 3. **Capacity (`cap`)**: The maximum number of elements the slice can hold.
+* Reallocation only happens when len(s) == cap(s)
+* in that case whether subslice or root slice
+* data pointer will point different location on memory and old existing items will be copied to new location 
 
 # Memory Layout Simulation
 The underlying structure in both languages looks like this(for ` int[] `  ):
