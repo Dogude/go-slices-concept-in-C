@@ -46,7 +46,7 @@ The underlying structure in both languages looks like this(for ` int[] `  ):
   ```
   ```c
      C:
-     s2 = slice(s, 2, 5); // s2.data = s.data + low; 
+     s2 = slice(s, 2, 5); // s2.data = s.data + low; this gives a address of shifted data pointer of root slice 
   ```
   ```c
   // C Equivalent:
@@ -56,14 +56,16 @@ The underlying structure in both languages looks like this(for ` int[] `  ):
     s = append(s, 13);
     s = append(s, 139);
     s = append(s, 140);
-    s = append(s, 141); // Triggers reallocation (len(s) == cap(s))
-    s = append(s, 142);
+    s = append(s, 141); // Triggers reallocation (len(s) == cap(s)) old items will copied to new memory location, after that line s is no longer points to old address
+    s = append(s, 142); 
 
-    Slice s2 = make(4, 10);
-    s2 = slice(s2, 2, 5);
+    PrintSlice(s);                         // Output: [12 13 139 140 141 142]
+
+    Slice s2 = make(4, 10); // len == 4 , cap 10 , creates zeroed-out 10xint, append write index is len (4) 
+    s2 = slice(s2, 2, 5);   // creating a subslice, len will be 5 - 2 , cap will be 10 - 2
 
     printf("%zu %zu\n", len(s2), cap(s2)); // Output: 3 8
-    PrintSlice(s);                         // Output: [12 13 139 140 141 142]
+    
     
     release(); // Custom cleanup
 }
