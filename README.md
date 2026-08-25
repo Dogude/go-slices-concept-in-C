@@ -15,9 +15,9 @@ A slice is not an array. It is a **header** that points to an underlying array. 
 The underlying structure in both languages looks like this(for ` int[] `  ):
 | Struct Field     | C Representation | Go Representation |
 | :---             | :---         | :---               |
-| **Data Pointer** | `int *data`  | `array UNSAFE.Pointer` |
-| **Length**       | `size_t len` | `int` |
-| **Capacity**     | `size_t cap` | `int` |
+| **Data Pointer** | `int *data`  | `data uintptr` |
+| **Length**       | `size_t len` | `len int` |
+| **Capacity**     | `size_t cap` | `cap int` |
 
 # Memory Management
   * In this example, linked list with header metadata used to chain all slice memory allocations and free them all once at the end of main.
