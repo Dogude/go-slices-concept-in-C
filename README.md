@@ -46,6 +46,7 @@ The underlying structure in both languages looks like this(for ` int[] `  ):
      s2 = slice(s, 2, 5); // s2.data = s.data + low; 
   ```
   ```c
+  // C Equivalent:
   int main() {
     Slice s = make(0, 5);
     s = append(s, 12);
@@ -59,9 +60,33 @@ The underlying structure in both languages looks like this(for ` int[] `  ):
     s2 = slice(s2, 2, 5);
 
     printf("%zu %zu\n", len(s2), cap(s2)); // Output: 3 8
-    PrintSlice(s);                         // Output: [ 12 13 139 140 141 142 ]
+    PrintSlice(s);                         // Output: [12 13 139 140 141 142]
     
     release(); // Custom cleanup
 }
+```
+
+```go
+    // Go Equivalent:
+    package main
+    
+    import "fmt"
+    
+    func main() {
+    	s := make([]int, 0, 5)
+    	s = append(s, 12)
+    	s = append(s, 13)
+    	s = append(s, 139)
+    	s = append(s, 140)
+    	s = append(s, 141) // Triggers reallocation (len(s) == cap(s))
+    	s = append(s, 142)
+    
+    	s2 := make([]int, 4, 10)
+    	s2 = s2[2:5]
+    
+    	fmt.Printf("%d %d\n", len(s2), cap(s2)) // Output: 3 8
+    	fmt.Println(s)   // Output: [12 13 139 140 141 142]
+
+    }
 ```
 
