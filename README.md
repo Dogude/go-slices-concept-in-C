@@ -58,7 +58,9 @@ The underlying structure in both languages looks like this(for ` int[] `  ):
     s = append(s, 13);
     s = append(s, 139);
     s = append(s, 140);
-    s = append(s, 141); // Triggers reallocation (len(s) == cap(s)) old items will copied to new memory location, after that line s is no longer points to old address
+    s = append(s, 141); // Triggers reallocation (len(s) == cap(s)) old items will copied to
+                        // new memory location, after that line s is no longer
+                        // points to old address
     s = append(s, 142); 
 
     PrintSlice(s);                         // Output: [12 13 139 140 141 142]
